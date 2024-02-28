@@ -1,0 +1,108 @@
+{% extends 'caters/base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    div.container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #8B4513; 
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex; 
+      flex-wrap: wrap;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      padding: 15px;
+      position: relative;
+    }
+
+    strong {
+      font-size: 1.2em;
+      color: #333;
+      width: 100%;
+    }
+
+    img {
+      max-width: 200px; 
+      max-height: 200px;
+      margin-top: 10px;
+      border-radius: 8px;
+      align-self: flex-start; 
+    }
+
+    p {
+      width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: #4CAF50;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #8B4513; 
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s; /* Added color transition */
+    }
+
+    button:hover {
+      background-color: #A0522D;
+    }
+  </style>
+
+  <div class="container">
+    <h2>Product List</h2>
+
+    {% if produ %}
+      <ul>
+        {% for product in produ %}
+          <li>
+            <strong>{{ product.name }}</strong>
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <p>
+              Category: {{ product.category.name }}<br>
+              Description: {{ product.desc }}<br>
+              Price: {{ product.price }}<br>
+              Quantity: {{ product.quantity }}<br>
+            </p>
+           
+            <button><a href="{% url 'update_product' product.id %}" style="color: white;">Update</a></button>
+            <form method="post" action="{% url 'delete_product' product.id %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No products available.</p>
+    {% endif %}
+  </div>
+{% endblock %}

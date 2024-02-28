@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Table</title>
+
+    <!-- Add some styles for a better table appearance -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f1e5; /* Light brown background */
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #2d1d0f; /* Dark brown text */
+            border-collapse: collapse;
+            border: 1px solid #9d7551; /* Border color */
+            background-color: #dbc2a2; /* Brown table background */
+        }
+
+        th, td {
+            padding: 1rem;
+            vertical-align: top;
+            border: 1px solid #9d7551; /* Border color */
+            text-align: left;
+        }
+
+        th {
+            background-color: #3d1f0f; /* Dark brown header background */
+            color: #ffffff; /* White header text */
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #c4a687; /* Light brown alternate row background */
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            padding: 0.3rem 0.5rem;
+            margin-right: 0.5rem;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #6f4e37; /* Dark brown success button */
+        }
+
+        .btn-danger {
+            background-color: #8d6c5c; /* Light brown danger button */
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Category</th>
+                    <th>Items</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for buynow in buynow_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ buynow.category }}</td>
+                    <td>{{ buynow.quantity }}</td>
+                    <td>{{ buynow.price }}</td>
+                    <!-- Add logic to display status based on buynow status field -->
+                    <td>
+                        {% if buynow.finished %} 
+                            Approved
+                        {% else %}
+                            Pending
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>

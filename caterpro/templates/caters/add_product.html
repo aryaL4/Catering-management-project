@@ -1,0 +1,113 @@
+{% extends 'caters/base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Additional Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    div.container {
+      max-width: 400px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #470d0d; 
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #4CAF50;
+    }
+
+    input[type="submit"] {
+      background-color: #8B4513; /* Brown color for the button */
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #5A2D0C; /* Darker brown color on hover */
+    }
+  </style>
+
+  <div class="container">
+    <h2>Add Product</h2>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div>
+        <label for="category">Category:</label>
+        <select name="category">
+          {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="image">Image:</label>
+        <input type="file" name="image" accept="image/*">
+      </div>
+
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" maxlength="50">
+      </div>
+
+      <div>
+        <label for="desc">Description:</label>
+        <textarea name="desc" rows="4" cols="50"></textarea>
+      </div>
+
+      <div>
+        <label for="price">Price:</label>
+        <input type="number" name="price">
+      </div>
+
+      <div>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" min="0">
+      </div>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+{% endblock %}

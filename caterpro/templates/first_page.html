@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering Management</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('static/images/homecaters.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
+
+        .main {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .user, .cater {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 5px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .user a {
+            display: block; 
+            margin-bottom: 10px; 
+        }
+
+        .cater a {
+            display: block; 
+            margin-bottom: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="user">
+            <h1>User</h1>
+            <a href="{% url 'user_registration' %}">Registration</a>
+            <a href="{% url 'user_log' %}">Login</a>
+        </div>
+        
+        <div class="cater">
+            <h1>Caters</h1>
+            <a href="{% url 'cater_reg' %}">Registration</a>
+            <a href="{% url 'cater_log' %}">Login</a>
+        </div>
+    </div>
+</body>
+</html>

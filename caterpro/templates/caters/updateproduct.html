@@ -1,0 +1,49 @@
+{% extends 'caters/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div style="max-width: 600px; margin: auto;">
+    <h2 style="text-align: center; color:#470d0d; ">Update Product</h2>
+
+    <form method="post" enctype="multipart/form-data" style="margin-top: 20px; display: flex; flex-direction: column; align-items: flex-start;">
+      {% csrf_token %}
+      
+      <div style="margin-bottom: 10px; width: 100%;">
+        <label for="category" style="display: block; margin-bottom: 5px; color: #555;">Category:</label>
+        <select name="category" style="width: 100%; padding: 8px;">
+          {% for category in categories %}
+            <option value="{{ category.id }}" {% if category.id == selected_product.category.id %}selected{% endif %}>{{ category.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div style="margin-bottom: 10px; width: 100%;">
+        <label for="image" style="display: block; margin-bottom: 5px; color: #555;">Image:</label>
+        <input type="file" name="image" accept="image/*" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="margin-bottom: 10px; width: 100%;">
+        <label for="name" style="display: block; margin-bottom: 5px; color: #555;">Name:</label>
+        <input type="text" name="name" maxlength="50" style="width: 100%; padding: 8px;" value="{{ selected_product.name }}">
+      </div>
+
+      <div style="margin-bottom: 10px; width: 100%;">
+        <label for="desc" style="display: block; margin-bottom: 5px; color: #555;">Description:</label>
+        <textarea name="desc" rows="4" cols="50" style="width: 100%; padding: 8px;">{{ selected_product.desc }}</textarea>
+      </div>
+
+      <div style="margin-bottom: 10px; width: 100%;">
+        <label for="price" style="display: block; margin-bottom: 5px; color: #555;">Price:</label>
+        <input type="number" name="price" style="width: 100%; padding: 8px;" value="{{ selected_product.price }}">
+      </div>
+
+      <div style="margin-bottom: 10px; width: 100%;">
+        <label for="quantity" style="display: block; margin-bottom: 5px; color: #555;">Quantity:</label>
+        <input type="number" name="quantity" min="0" style="width: 100%; padding: 8px;" value="{{ selected_product.quantity }}">
+      </div>
+
+      <button type="submit" style="background-color: #8B4513; color: white; padding: 10px; border: none; width: 100%; cursor: pointer; transition: background-color 0.3s;">Update</button>
+    </form>
+  </div>
+{% endblock %}
+

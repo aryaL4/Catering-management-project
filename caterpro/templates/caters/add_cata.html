@@ -1,0 +1,75 @@
+<!-- add_category.html -->
+{% extends 'caters/base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Add your styles here */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff; /* Changed background color */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center; /* Centering the form */
+    }
+
+    h2 {
+      color: #8B4513; 
+      margin: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    input:focus {
+      border-color: #4CAF50;
+    }
+
+    button {
+      background-color: #8B4513; 
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #A0522D;/
+    }
+
+   
+  </style>
+
+  <h2>Add Category</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="id_name">Category:</label>
+      <input type="text" name="name" id="id_name" placeholder="Enter category name" required>
+    </div>
+    <div>
+      <label for="id_img">Image:</label>
+      <input type="file" name="img" id="id_img" accept="image/*" required>
+    </div>
+    <button type="submit">Save Category</button>
+  </form>
+{% endblock %}

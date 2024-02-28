@@ -1,0 +1,66 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="card">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+            {% endif %}
+            <div class="card-body">
+                <h2 class="card-title">{{ product.name }}</h2>
+                <p class="card-text">{{ product.desc }}</p>
+                <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                <p class="card-text"><strong>Quantity:</strong> {{ product.quantity }}</p>
+                {% if product.category %}
+                    <p class="card-text"><strong>Category:</strong> {{ product.category.name }}</p>
+                {% endif %}
+
+                <!-- Buy Now form -->
+                <form method="post" action="{% url 'buy_now' product.id %}" class="mt-3">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">name:</label>
+                        <input type="text" name="name" class="form-control"  required >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity:</label>
+                        <input type="number" name="quantity" class="form-control" min="1" required onchange="updateTotalPrice()">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category:</label>
+                        <select name="category" class="form-control" required>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Total Price:</label>
+                        <input type="number" name="price" id="totalPrice" class="form-control" value="{{ product.price }}" readonly required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address:</label>
+                        <textarea name="address" class="form-control" rows="4" required></textarea>
+                    </div>
+                
+                    <button type="submit" class="btn btn-success">Buy Now</button>
+                </form>
+                
+                <script>
+                    function updateTotalPrice() {
+                        var quantity = document.querySelector('[name="quantity"]').value;
+                        var price = {{ product.price }};
+                        var totalPrice = quantity * price;
+                        document.querySelector('#totalPrice').value = totalPrice.toFixed(2);
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

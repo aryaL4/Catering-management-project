@@ -1,0 +1,89 @@
+{% extends 'caters/base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Additional Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    h2 {
+      text-align: center;
+      color: #8B4513;
+      margin-top: 20px;
+    }
+
+    .row {
+      margin: 0 -15px;
+    }
+
+    .col-md-4 {
+      padding: 0 15px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      overflow: hidden; 
+      display: flex;
+    }
+
+    .card-img-top {
+      width: 200px;
+      height: auto;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      max-height: 200px; /* Set the maximum height for the image */
+    
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #ffffff; /* Changed link color */
+      cursor: pointer;
+      font-size: 20px;
+    }
+    button{
+      background-color: #8B4513;
+      
+      margin: auto;
+      padding: 12px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <div class="container">
+    <h2>Category List</h2>
+    <div class="row">
+      {% for category in categories %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            {% if category.img %}
+              <img src="{{ category.img.url }}" class="card-img-top" alt="{{ category.name }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ category.name }}</h5>
+              <button><a href="{% url 'delete_category' category.id %}">delete</a></button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

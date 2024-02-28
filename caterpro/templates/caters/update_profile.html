@@ -1,0 +1,76 @@
+{% extends 'caters/base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Additional Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    div.container {
+      max-width: 400px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #470d0d;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+
+    input:focus {
+      border-color: #4CAF50;
+    }
+
+    input[type="submit"] {
+      background-color: rgb(114, 26, 26);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color:brown;
+    }
+  </style>
+
+  <div class="container">
+    <h2 style="color: #910808;">Update Product</h2>
+    <form method="post">
+      {% csrf_token %}
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" value="{{ upd.email }}">
+      <br>
+      <input type="submit" value="Update Profile">
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card" style="background-color: #dbc2a2; border: 2px solid #9d7551; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid" width="300px" height="300px">
+        {% endif %}
+        <div class="card-body" style="color: #2d1d0f;">
+            <h2 class="card-title" style="color: #3d1f0f;">{{ product.name }}</h2>
+            <p class="card-text">{{ product.desc }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+            <p class="card-text"><strong>Quantity:</strong> {{ product.quantity }}</p>
+            {% if product.category %}
+                <p class="card-text"><strong>Category:</strong> {{ product.category.name }}</p>
+            {% endif %}
+
+            <a href="{% url 'buy_now' product.id %}" class="btn btn-success" style="background-color: #6f4e37; border-color: #5a3c2a;">Buy Now</a>
+
+            <a href="" class="btn btn-primary ml-2" style="background-color: #8d6c5c; border-color: #7a5b4b;">Back to Featured Products</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
